@@ -32,7 +32,7 @@ public class LoggingGlobalPostFilter implements GlobalFilter, Ordered {
 
     private static final Set<String> LOGGABLE_CONTENT_TYPES = new HashSet<>(
             Arrays.asList(MediaType.APPLICATION_JSON_VALUE.toLowerCase(),
-                    MediaType.APPLICATION_JSON_UTF8_VALUE.toLowerCase(), MediaType.TEXT_PLAIN_VALUE,
+                    MediaType.APPLICATION_JSON_VALUE.toLowerCase(), MediaType.TEXT_PLAIN_VALUE,
                     MediaType.TEXT_XML_VALUE, "application/ipp"));
 
     @Override
