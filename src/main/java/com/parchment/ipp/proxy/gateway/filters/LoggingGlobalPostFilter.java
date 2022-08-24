@@ -1,14 +1,21 @@
 package com.parchment.ipp.proxy.gateway.filters;
 
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_ROUTE_ATTR;
+
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.route.Route;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -37,7 +44,12 @@ public class LoggingGlobalPostFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        // First we get here request in exchange
+        Set<URI> uris = exchange.getAttributeOrDefault(GATEWAY_ORIGINAL_REQUEST_URL_ATTR, Collections.emptySet());
+        String originalUri = uris.isEmpty() ? exchange.getRequest().getURI().toString() : uris.iterator().next().toString();        Route route = exchange.getAttribute(GATEWAY_ROUTE_ATTR);
+        URI routeUri = exchange.getAttribute(GATEWAY_REQUEST_URL_ATTR);
+        log.info("Incoming request " + originalUri + " is routed to id: " + route.getId()
+                + ", uri:" + routeUri);
+
         ServerHttpRequestDecorator requestMutated = new ServerHttpRequestDecorator(exchange.getRequest()) {
             @Override
             public Flux<DataBuffer> getBody() {
@@ -102,6 +114,7 @@ public class LoggingGlobalPostFilter implements GlobalFilter, Ordered {
             sb.append("Headers      :").append(request.getHeaders().toSingleValueMap()).append("\n");
             sb.append("Method       :").append(request.getMethod()).append("\n");
             sb.append("Client       :").append(request.getRemoteAddress()).append("\n");
+            sb.append("Address      :").append(request.getRemoteAddress().getHostName()).append("\n");
         }
 
 

@@ -30,9 +30,9 @@ public class PrinterRoutePredicateFactory extends AbstractRoutePredicateFactory<
         return (ServerWebExchange swe) -> {
             String printerName = swe.getRequest().getPath()
                     .subPath(swe.getRequest().getPath().elements().size() - 1).value();
-              boolean isProd = ippMemberPrinterService.checkPrinterEnvironment(printerName);
-              logger.info("Is printer production {}", isProd);
-              return config.isProd() ? isProd: !isProd;
+              boolean isPappl = ippMemberPrinterService.checkPrinterEnvironment(printerName);
+              logger.info("Is printer production {}", isPappl);
+              return config.isPappl() ? isPappl: !isPappl;
         };
     }
 
@@ -44,7 +44,7 @@ public class PrinterRoutePredicateFactory extends AbstractRoutePredicateFactory<
     @AllArgsConstructor(access = AccessLevel.PUBLIC)
     public static class Config {
 
-        boolean isProd = true;
+        boolean isPappl = true;
 
     }
 }

@@ -12,7 +12,7 @@ public class IppPrinterMemberServiceImpl implements IppMemberPrinterService{
     @Override
     public boolean checkPrinterEnvironment(String printerName) {
         logger.info("Checking printer environment {}", printerName);
-        if(printerName.equalsIgnoreCase("9wwq6g4")) {
+        if(printerName.equalsIgnoreCase("generic")) {
             return true;
         }
         return false;

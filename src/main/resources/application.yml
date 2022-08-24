@@ -16,3 +16,10 @@ logging:
       springframework:
         cloud:
           gateway: DEBUG
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
