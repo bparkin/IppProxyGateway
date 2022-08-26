@@ -40,7 +40,7 @@ public class GatewayConfig {
                             logger.info("Printing request {} ", request.getURI());
                             return chain.filter(exchange.mutate().request(request).build());
                         }))*/
-                        .uri("http://kubernetes.docker.internal"))
+                        .uri("https://qa-ipp-everywhere.parchment.com"))
                 .build();
     }
 

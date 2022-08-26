@@ -40,7 +40,7 @@ public class LoggingGlobalPostFilter implements GlobalFilter, Ordered {
     private static final Set<String> LOGGABLE_CONTENT_TYPES = new HashSet<>(
             Arrays.asList(MediaType.APPLICATION_JSON_VALUE.toLowerCase(),
                     MediaType.APPLICATION_JSON_VALUE.toLowerCase(), MediaType.TEXT_PLAIN_VALUE,
-                    MediaType.TEXT_XML_VALUE, "application/ipp"));
+                    MediaType.TEXT_XML_VALUE, MediaType.TEXT_HTML_VALUE, "application/ipp"));
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -106,6 +106,7 @@ public class LoggingGlobalPostFilter implements GlobalFilter, Ordered {
             sb.append("---- Response -----").append("\n");
             sb.append("Headers      :").append(response.getHeaders().toSingleValueMap()).append("\n");
             sb.append("Status code  :").append(response.getStatusCode()).append("\n");
+            sb.append("Cookies      :").append(response.getCookies()).append("\n");
         }
 
         Logger(ServerHttpRequest request) {
