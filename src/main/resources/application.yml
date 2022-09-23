@@ -1,10 +1,5 @@
 server:
   port: 8349
-#spring:
- # cloud:
-  #####    predicates:
-       #     - Path=/printers/*
-#
 management:
   endpoints:
     web:

@@ -27,7 +27,7 @@ public class GatewayConfig {
                         .predicate(prf.apply(
                                 new Config(
                                         false)))
-                        .uri("https://ipp.staging.escrip-safe.com"))
+                        .uri("https://dummy.com"))
                 .route("ipp_prod_route", r -> r.path("/ipp/print/*").and()
                         .predicate(prf.apply(
                                 new Config(
@@ -40,7 +40,7 @@ public class GatewayConfig {
                             logger.info("Printing request {} ", request.getURI());
                             return chain.filter(exchange.mutate().request(request).build());
                         }))*/
-                        .uri("https://qa-ipp-everywhere.parchment.com"))
+                        .uri("https://testprinter:443"))
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class GatewayConfig {
                 .route("ipp_staging_route",
                         r -> r.path("/printers/*")
                                 .filters(f -> f.filter(lgf.apply(new Config("CustomMessage", true, true))))
-                                .uri("https://ipp.staging.escrip-safe.com"))
+                                .uri("https://dummy.edu"))
                 .build();
 
     }*/
@@ -61,7 +61,7 @@ public class GatewayConfig {
         return builder.routes()
                 .route("ipp_staging_route",
                         r -> r.path("/printers/*")
-                                .uri("https://ipp.staging.escrip-safe.com"))
+                                .uri("https://dummy.edu"))
                 .build();
 
     }*/
