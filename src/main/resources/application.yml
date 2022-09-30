@@ -1,15 +1,20 @@
 server:
   port: 8349
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: ipp_route
-          uri: https://ipp.staging.escrip-safe.com
-          predicates:
-            - Path=/printers/*
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway: DEBUG
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true

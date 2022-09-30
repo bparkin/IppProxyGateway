@@ -14,7 +14,7 @@
     <name>IppProxyGateway</name>
     <description>IppProxyGateway</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
     </properties>
     <dependencies>
@@ -31,6 +31,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
         </dependency>
     </dependencies>
     <dependencyManagement>
